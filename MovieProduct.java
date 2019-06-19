@@ -11,12 +11,7 @@ public abstract class MovieProduct implements Product {
         this.title = title;
         this.summary = summary;
         this.length = length;
-
-        if (isPriceExternal) {
-            this.price = ExternalPricingService.priceForTitle(title);
-        } else {
-            this.price = price;
-        }
+        this.price = price;
     }
 
     @Override
@@ -26,7 +21,11 @@ public abstract class MovieProduct implements Product {
 
     @Override
     public Double getPrice() {
-        return price;
+        if (isPriceExternal) {
+            this.price = ExternalPricingService.priceForTitle(title);
+        } else {
+            this.price = price;
+        }
     }
 
     @Override
